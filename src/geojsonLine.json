@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "place": "Zona 1",
+        "fill": "#00ffff",
+        "fill-opacity": 0.2
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -68.0611767,
+              -38.947575
+            ],
+            [
+              -68.052100,
+              -38.947575
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
