@@ -121,14 +121,15 @@ class App extends Component {
       return;
     }
 
-    const len = gjLocal.features[0].geometry.coordinates[0].length;
+    const cantidadDePuntos = gjLocal.features[0].geometry.coordinates[0].length;
 
-    // Elimino el ultimo punto
-    gjLocal.features[0].geometry.coordinates[0].splice(len - 1, 1);
+    // Elimino el ultimo punto, que siempre es igual que el primero
+    gjLocal.features[0].geometry.coordinates[0].splice(cantidadDePuntos - 1, 1);
 
     // Si fué con ctrl
     if (evt.originalEvent.ctrlKey) {
-      // buscar punto
+      // buscar punto mas cercano
+      // ToDo : deberia poner limites
       const index = this.buscarMasCercano(evt);
 
       // eliminar punto
@@ -334,7 +335,8 @@ class App extends Component {
               'fill-opacity': { type: 'identity', property: 'fill-opacity' },
             }}
             circleLayout={{ visibility: 'visible' }}
-            circlePaint={{ 'circle-color': { type: 'identity', property: 'fill' } }} // fillOnMouseDown={this.OnMouseDown}
+            circlePaint={{ 'circle-color': { type: 'identity', property: 'fill' } }}
+            // fillOnMouseDown={this.OnMouseDown}
             linelayout={{ visibility: 'visible' }}
             linePaint={{
               'line-color': { type: 'identity', property: 'fill' },
