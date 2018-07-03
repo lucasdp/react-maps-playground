@@ -4,9 +4,12 @@ import isPip from 'robust-point-in-polygon';
 
 import ReactMapboxGl, { Layer, GeoJSONLayer, Feature } from 'react-mapbox-gl';
 import geojson from './geojson.json';
+import zona2 from './zona2.json';
+
 import { setRTLTextPlugin } from 'mapbox-gl';
 
 let gjLocal = { ...geojson };
+let zona2Local = { ...zona2 };
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -32,7 +35,14 @@ class App extends Component {
   };
 
   onMouseUp = (map, evt) => {
-    this.setState({ dragging: false });
+    if (this.state.dragging) {
+      this.setState({
+        dragging: false,
+      });
+    }
+  };
+  onStopDrag = (map, evt) => {
+    // this.setState({ dragging: false });
   };
 
   logEvent = evt => {
@@ -114,7 +124,7 @@ class App extends Component {
   }
 
   onMouseDown = (map, evt) => {
-    evt.preventDefault();
+    // evt.preventDefault();
 
     // Si no es clic derecho
     if (evt.originalEvent.button !== 2) {
@@ -344,6 +354,32 @@ class App extends Component {
               'line-width': 2,
             }}
             circleOnMouseDown={this.onStartDrag}
+            symbolPaint={{ 'text-color': 'black' }}
+            symbolLayout={{
+              'text-field': '{place}',
+              'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+              'text-offset': [0, 0.6],
+              'text-anchor': 'top',
+            }}
+          />
+          <GeoJSONLayer
+            id="zona-2"
+            data={zona2Local}
+            fillLayout={{ visibility: 'visible' }}
+            fillPaint={{
+              'fill-color': { type: 'identity', property: 'fill' },
+              'fill-opacity': { type: 'identity', property: 'fill-opacity' },
+            }}
+            circleLayout={{ visibility: 'visible' }}
+            circlePaint={{ 'circle-color': { type: 'identity', property: 'fill' } }}
+            linelayout={{ visibility: 'visible' }}
+            linePaint={{
+              'line-color': { type: 'identity', property: 'fill' },
+              'line-opacity': 0.8,
+              'line-width': 2,
+            }}
+            circleOnMouseDown={this.onStartDrag}
+            circleOnMouseUp={this.onStopDrag}
             symbolPaint={{ 'text-color': 'black' }}
             symbolLayout={{
               'text-field': '{place}',
