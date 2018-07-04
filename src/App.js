@@ -11,6 +11,11 @@ import { setRTLTextPlugin } from 'mapbox-gl';
 let gjLocal = { ...geojson };
 let zona2Local = { ...zona2 };
 
+// parse coordenadas
+
+zona2Local.features[0].geometry.coordinates = JSON.parse(
+  zona2Local.features[0].geometry.coordinates,
+);
 const Map = ReactMapboxGl({
   accessToken:
     'pk.eyJ1IjoibHVjYXNkcCIsImEiOiJjaml2dXNiaGswY3NpM2tvc3k2YzR1YWt5In0.qco86APyc1wZPEOt9ZcbeA',
