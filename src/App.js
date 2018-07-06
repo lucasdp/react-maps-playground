@@ -4,18 +4,18 @@ import isPip from 'robust-point-in-polygon';
 
 import ReactMapboxGl, { Layer, GeoJSONLayer, Feature } from 'react-mapbox-gl';
 import geojson from './geojson.json';
-import zona2 from './zona2.json';
+// import zona2 from './zona2.json';
 
 import { setRTLTextPlugin } from 'mapbox-gl';
 
 let gjLocal = { ...geojson };
-let zona2Local = { ...zona2 };
+// let zona2Local = { ...zona2 };
 
 // parse coordenadas
 
-zona2Local.features[0].geometry.coordinates = JSON.parse(
-  zona2Local.features[0].geometry.coordinates,
-);
+// zona2Local.features[0].geometry.coordinates = JSON.parse(
+//   zona2Local.features[0].geometry.coordinates,
+// );
 const Map = ReactMapboxGl({
   accessToken:
     'pk.eyJ1IjoibHVjYXNkcCIsImEiOiJjaml2dXNiaGswY3NpM2tvc3k2YzR1YWt5In0.qco86APyc1wZPEOt9ZcbeA',
@@ -367,32 +367,7 @@ class App extends Component {
               'text-anchor': 'top',
             }}
           />
-          <GeoJSONLayer
-            id="zona-2"
-            data={zona2Local}
-            fillLayout={{ visibility: 'visible' }}
-            fillPaint={{
-              'fill-color': { type: 'identity', property: 'fill' },
-              'fill-opacity': { type: 'identity', property: 'fill-opacity' },
-            }}
-            circleLayout={{ visibility: 'visible' }}
-            circlePaint={{ 'circle-color': { type: 'identity', property: 'fill' } }}
-            linelayout={{ visibility: 'visible' }}
-            linePaint={{
-              'line-color': { type: 'identity', property: 'fill' },
-              'line-opacity': 0.8,
-              'line-width': 2,
-            }}
-            circleOnMouseDown={this.onStartDrag}
-            circleOnMouseUp={this.onStopDrag}
-            symbolPaint={{ 'text-color': 'black' }}
-            symbolLayout={{
-              'text-field': '{place}',
-              'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-              'text-offset': [0, 0.6],
-              'text-anchor': 'top',
-            }}
-          />
+
           <Layer type="circle" id="marker" paint={{ 'circle-color': '#ff0000' }}>
             <Feature coordinates={this.state.punto ? this.state.punto : this.state.centerMap} />
           </Layer>
